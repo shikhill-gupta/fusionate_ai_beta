@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }} - My Django Application</title>
+    {% load static %}
+
+
+
+
+
+    <!-- JS For Bootstrap CSS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+
+    <link rel="stylesheet" type="text/css" href="{% static 'app/content/bootstrap.min.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'app/content/style.css' %}" />
+
+    <script src="{% static 'app/scripts/modernizr-2.6.2.js' %}"></script>
+    <script src="{% static 'app/scripts/vue.min.js' %}"></script>        
+    <script src="{% static 'app/scripts/axios.min.js' %}"></script>     
+
+
+ <link rel="script" type="text/javascript" href="{% static 'app/content/owl.carousel.min.css' %}" />
+</head>
+
+<style>
+
+    .slideInRight {
+  -webkit-animation-name: fadeIn;
+  animation-name: fadeIn;
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+  }
+  @-webkit-keyframes fadeIn {
+  0% {opacity: 0;}
+  100% {opacity: 1;}
+  }
+  @keyframes fadeIn {
+  0% {opacity: 0;}
+  100% {opacity: 1;}
+  }
+ 
+
+
+
+ .slideInUp {
+  -webkit-animation-name: slideInUp;
+  animation-name: slideInUp;
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+  }
+  @-webkit-keyframes slideInUp {
+  0% {
+  -webkit-transform: translateY(100%);
+  transform: translateY(100%);
+  visibility: visible;
+  }
+  100% {
+  -webkit-transform: translateY(0);
+  transform: translateY(0);
+  }
+  }
+  @keyframes slideInUp {
+  0% {
+  -webkit-transform: translateY(100%);
+  transform: translateY(100%);
+  visibility: visible;
+  }
+  100% {
+  -webkit-transform: translateY(0);
+  transform: translateY(0);
+  }
+  } 
+
+  /* For Webkit based browsers (e.g., Chrome, Safari) */
+  ::-webkit-scrollbar {
+    width: 10px;
+    border-radius: 5px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background-color: dimgray;
+    border-radius: 5px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: #888;
+    border-radius: 5px;
+  }
+
+  /* For Firefox */
+  scrollbar-width: thin;
+  scrollbar-color: #888 #f1f1f1;
+
+  /* For IE and Edge */
+  -ms-overflow-style: none;
+  scrollbar-width: thin;
+  scrollbar-color: #888 #f1f1f1;
+
+
+</style>
+
+
+<body class="bg-dark text-white">
+
+
+
+<nav class="navbar navbar-expand-lg navbar-light bg-primary">
+  <div class="container-fluid">
+    <a style="color:white;"class="navbar-brand" href="#">Fusionate AI</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarText">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active text-white" aria-current="page" href="{% url 'home' %}">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white"href="{% url 'about' %}">Features</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white" href="{% url 'contact' %}">Pricing</a>
+        </li>
+      </ul>
+      <span class="navbar-text">
+         {% include 'app/loginpartial.html' %}
+      </span>
+    </div>
+  </div>
+</nav>
+
+
+{% if request.user.is_authenticated == True %}
+<aside class="sidebar bg-dark">
+      <div class="toggle" >
+        <a href="#" class="burger js-menu-toggle" data-toggle="collapse" data-target="#main-navbar">
+              <span></span>
+            </a>
+      </div>
+            
+    <div class="container">
+  <div class="card bg-secondary mt-4">
+  <div class="row no-gutters">
+    <div class="col-md-4 mt-4 mb-4">
+        <center>
+      <img src="https://cdn.pixabay.com/photo/2019/04/21/19/36/cat-4144810__340.jpg" class="rounded-circle" style="width: 75px; height: 75px;" alt="User Image">
+    </center>
+            </div>
+    <div class="col-md-8">
+      <div class="card-body">
+        <h5 class="card-title">Shadow</h5>
+        <p class="card-text">@shadowthecat</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="card-footer">
+      <center>
+    <i class="bi bi-bell-fill"></i> Notifications</center>
+  </div>
+</div>
+  <ul class="nav nav-pills mt-4">
+  <li class="nav-item">
+    <a class="nav-link active bg-secondary text-white" href="#">Home</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link text-white" href="#">Apps</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link text-white" href="#">AI Tools</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link text-white" href="#">Agents</a>
+  </li>
+</ul>
+    </div>
+
+   
+</aside>
+{% endif %}
+
+
+    <div class="container">
+        
+
+
+
+
+
+        {% block content %}
+
+        {% endblock %}
+ 
+
+    </div>
+
+
+    
+     <script src="{% static 'app/scripts/respond.js' %}"></script>
+    <script src="{% static 'app/scripts/popper.min.js' %}"></script>
+    <script src="{% static 'app/scripts/main.js' %}"></script>
+
+
+
+{% block scripts %}{% endblock %}
+
+</body>
+</html>

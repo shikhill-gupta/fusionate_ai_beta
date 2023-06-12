@@ -1,0 +1,98 @@
+{% extends "app/layout.html" %}
+{% load crispy_forms_tags %}
+
+
+
+
+
+{% block content %}
+
+
+
+
+
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <form method="post" action="{% url 'register' %}">
+                    {% csrf_token %}
+
+              <div class="modal-header">
+                <h5 class="modal-title text-dark"  id="exampleModalLabel">Register</h5>
+
+              </div>
+              <div class="modal-body text-dark" id="universal_modal_contents">
+                {{registration_form|crispy}}
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Exit</button>
+                <button type="submit" class="btn btn-primary">Save changes</button>
+              </div>
+
+               </form>
+            </div>
+          </div>
+        </div>
+
+
+
+
+
+
+<br>
+<h2 class="display-6">{{ title }}</h2>
+<p class="lead">Login your account to use Fusionate!</p>
+<div class="row mt-4 mb-4">
+    <div class="col-lg-12">
+        <section id="loginForm">
+            <form action="." method="post" class="form-horizontal">
+                {% csrf_token %}
+                <hr />
+                <div class="form-group">
+                    <label for="id_username" class="col-md-2 control-label">User name</label>
+                    <div class="col-md-6">
+                        {{ form.username }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="id_password" class="col-md-2 control-label">Password</label>
+                    <div class="col-md-6">
+                        {{ form.password }}
+                    </div>
+                </div>
+                <div class="form-group mt-4">
+                    <div class="col-md-offset-2 col-md-12">
+                        <input type="hidden" name="next" value="/" />
+                        <input type="submit" style=" value="Log in" class="btn btn-primary" />
+                    </div>
+                </div>
+                {% if form.errors %}
+                <p class="validation-summary-errors">Please enter a correct user name and password.</p>
+                {% endif %}
+            </form>
+        </section>
+    </div>
+    <div class="col-md-4">
+        <section id="socialLoginForm"></section>
+    </div>
+</div>
+
+<p class="lead">No account yet?, register <a href="#" id="register-link" data-toggle="modal" data-target="#exampleModal">now</a>.</p>
+
+
+
+
+
+{% endblock %}
+
+
+{% block scripts %}
+
+
+
+
+
+{% load static %}
+<script src="{% static 'app/scripts/jquery.validate.min.js' %}"></script>
+
+{% endblock %}

@@ -1,0 +1,221 @@
+{% extends "app/layout.html" %} {% block content %} 
+
+
+
+{% if request.user.is_authenticated == True %}
+
+<div class="row mt-4">
+  <div class="col-lg-9 mb-4">
+    <div class="card bg-dark border-dark">
+      <div class="card-body" id="chat_card">
+        <div class="row" style="height:700px;">
+          <div class="col-lg-12">
+            <div class="table-responsive">
+              <div class="container">
+                <div class="row">
+                  <div class="col">
+                    <div class="chat-box overflow-x-auto" style="max-height: 650px;" id="message_box">
+                      <div class="message mb-4" hidden>
+                        <div class="row">
+                          <div class="col-lg-1">
+                            <img src="https://cdn.pixabay.com/photo/2019/04/21/19/36/cat-4144810__340.jpg" class="rounded-circle" style="width: 75px; height: 75px;" alt="User Image">
+                          </div>
+                          <div class="col-lg-11">
+                            <p class="lead"> "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?" </p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row mt-4">
+          <div class="col-lg-10">
+            <input type="text" id="input_message" placeholder="Chat with Fusionate AI" style="color:white; background-color: #09080A;" class="form-control border border-dark" />
+          </div>
+          <div class="col-lg-2">
+            <button style="width: 100%;" class="btn btn-success" @click="enterChat()">Enter</button>
+          </div>
+        </div>
+      </div>
+
+      <script>
+        function getCookie(name) {
+          const cookieValue = document.cookie.match('(^|;)\\s*' + name + '\\s*=\\s*([^;]+)');
+          return cookieValue ? cookieValue.pop() : '';
+        }
+        new Vue({
+          delimiters: ["[[", "]]"],
+          el: "#chat_card",
+          data: {
+            chat: [],
+          },
+          mounted() {
+            alert("Mounted");
+          },
+          methods: {
+            fetchChickens() {
+              axios.get("api/chicken-history/").then(response => {
+                this.chickenHistories = response.data;
+                console.log(this.chickenHistories);
+              }).catch(error => {
+                console.error(error);
+              });
+            },
+            giveAnswer(response) {
+              const my_message = document.getElementById('input_message').value;
+              var messageBox = document.getElementById('message_box');
+              var newMessage = document.createElement('div');
+              newMessage.className = 'message mb-4';
+              var messageContent = `
+                            
+					<div class="slideInUp">
+						<div class="row">
+							<div class="col-lg-1">
+								<img src="https://media.licdn.com/dms/image/D560BAQGs8qZo816PpA/company-logo_200_200/0/1684314285084?e=1694044800&v=beta&t=J5Elu6vduC0nEwE3k4oQ7GgGD-nbscg5URP0wXv83pI" class="rounded-circle" style="width: 75px; height: 75px;" alt="User Image">
+								</div>
+								<div class="col-lg-11">
+									<pre style="color: #b3b3b3; font-family: Arial, sans-serif; display: inline-block; font-size: 1.25rem; font-weight: 300;">` + String(response) + `</pre>
+								</div>
+							</div>
+						</div>
+                          `;
+              newMessage.innerHTML = messageContent;
+              messageBox.appendChild(newMessage);
+            },
+            enterChat() {
+              const my_message = document.getElementById('input_message').value;
+              var messageBox = document.getElementById('message_box');
+              var newMessage = document.createElement('div');
+              newMessage.className = 'message mb-4';
+              var messageContent = `
+						<div class="slideInRight">
+							<div class="row">
+								<div class="col-lg-1">
+									<img src="https://cdn.pixabay.com/photo/2019/04/21/19/36/cat-4144810__340.jpg" class="rounded-circle" style="width: 75px; height: 75px;" alt="User Image">
+									</div>
+									<div class="col-lg-11">
+										<p class="lead">` + String(my_message) + `</p>
+									</div>
+								</div>
+							</div>
+                          `;
+              newMessage.innerHTML = messageContent;
+              messageBox.appendChild(newMessage);
+              document.getElementById('input_message').value = "";
+              const csrftoken = getCookie('csrftoken');
+              axios.defaults.headers.common['X-CSRFToken'] = csrftoken;
+              const formData = new FormData();
+              formData.append('question', my_message);
+              axios.post("/ask/", formData).then(response => {
+                console.log(response.data.message);
+                const theAnswer = String(response.data.message);
+                this.giveAnswer(theAnswer);
+              }).catch(error => {
+                alert(error.message);
+              });
+            }
+          }
+        });
+      </script>
+    </div>
+
+  </div>
+
+  <div class="col-lg-3">
+
+      <div class="row-card">
+      
+
+        <p class="lead">Upload to My Vault</p>
+
+       <div class="card text-white bg-dark mb-3">
+        <div class="card-header">Header</div>
+        <div class="card-body">
+          <div class="mb-3">
+
+              <label for="formFile" class="form-label">Choose your file: </label>
+              <input class="form-control mb-4 bg-dark" style="color:white;" type="file" id="formFile">
+             <input type="submit" value="Upload File" class="btn btn-secondary" style="width: 100%; display:inline-block;" />
+</div>
+        </div>
+      </div>
+
+
+
+        <p class="lead">Teams</p>
+
+
+       <div class="card text-white bg-warning mb-3">
+        <div class="card-header">Header</div>
+        <div class="card-body">
+          <h5 class="card-title">Primary card title</h5>
+          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        </div>
+      </div>
+
+         
+       <div class="card text-white bg-primary mb-3">
+        <div class="card-header">Header</div>
+        <div class="card-body">
+          <h5 class="card-title">Primary card title</h5>
+          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        </div>
+      </div>
+
+       <div class="card text-white bg-success mb-3">
+        <div class="card-header">Header</div>
+        <div class="card-body">
+          <h5 class="card-title">Primary card title</h5>
+          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        </div>
+      </div>
+
+
+        <p class="lead">Folders</p>
+
+
+       <div class="card text-white bg-secondary mb-3">
+        <div class="card-header">Documents</div>
+        <div class="card-body">
+          <h5 class="card-title">Number of Files</h5>
+          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        </div>
+      </div>
+
+
+
+       <div class="card text-white bg-secondary mb-3">
+        <div class="card-header">Images</div>
+        <div class="card-body">
+          <h5 class="card-title">Number of Files</h5>
+          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        </div>
+      </div>
+
+
+       <div class="card text-white bg-secondary mb-3">
+        <div class="card-header">Videos</div>
+        <div class="card-body">
+          <h5 class="card-title">Number of Files</h5>
+          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        </div>
+      </div>
+
+
+
+  
+       </div>
+
+  </div>
+
+
+</div> 
+{% endif %}
+
+
+{% endblock %}
