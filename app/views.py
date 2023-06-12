@@ -24,8 +24,8 @@ from langchain.llms import OpenAI
 import os
 
 
-os.environ["OPENAI_API_KEY"] = ""
-os.environ["HUGGINGFACEHUB_API_TOKEN"] = ""
+os.environ["OPENAI_API_KEY"] = "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"
+os.environ["HUGGINGFACEHUB_API_TOKEN"] = "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"
 
 
 #TOKENS
