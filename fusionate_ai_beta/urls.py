@@ -8,9 +8,13 @@ from django.contrib import admin
 from django.contrib.auth.views import LoginView, LogoutView
 from app import forms, views
 
-
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
+    path('api/files/<int:user_id>/', views.FileListAPIView.as_view(), name='file-list'),
+
+    path('upload_files', views.handle_file_upload, name='upload_files'),
     path('', views.home, name='home'),
     path('ask/', views.askQuestion, name='ask'),
     path('contact/', views.contact, name='contact'),
@@ -32,3 +36,5 @@ urlpatterns = [
     path('logout/', LogoutView.as_view(next_page='/'), name='logout'),
     path('admin/', admin.site.urls),
 ]
+
+

@@ -9,6 +9,8 @@ from django.utils.translation import gettext_lazy as _
 
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
+from .models import *
+
 
 
 class BootstrapAuthenticationForm(AuthenticationForm):
@@ -29,3 +31,9 @@ class RegistrationForm(UserCreationForm):
     class Meta:
         model = User
         fields = ['username', 'email', 'password1', 'password2']
+
+
+class FileUploadForm(forms.ModelForm):
+    class Meta:
+        model = File
+        fields = ['user', 'file']

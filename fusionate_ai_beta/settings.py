@@ -32,6 +32,7 @@ ALLOWED_HOSTS = ['*']
 INSTALLED_APPS = [
     'app',
     # Add your apps here to enable them
+    'rest_framework',
     'crispy_forms',
     'crispy_bootstrap5',
     'django.contrib.admin',
@@ -40,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
 ]
 
 
@@ -117,3 +119,17 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 STATIC_URL = '/static/'
 STATIC_ROOT = posixpath.join(*(BASE_DIR.split(os.path.sep) + ['static']))
+
+#STATIC_URL = '/static/'
+#STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')  # This is where your static files will be collected during deployment
+
+# Additional static files directories (optional)
+#STATICFILES_DIRS = [
+    #os.path.join(BASE_DIR, 'static'),  # Add any additional directories containing static files
+#]
+
+
+CORS_ORIGIN_WHITELIST = ['*']
+CORS_ALLOWED_ORIGINS = ['*']
+
+CSRF_TRUSTED_ORIGINS = ['https://48ee-180-190-214-10.ngrok-free.app']

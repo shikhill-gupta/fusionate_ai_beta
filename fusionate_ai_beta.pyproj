@@ -4,7 +4,7 @@
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <Name>fusionate_ai_beta</Name>
     <RootNamespace>fusionate_ai_beta</RootNamespace>
-    <InterpreterId>MSBuild|fusionate|$(MSBuildProjectFullPath)</InterpreterId>
+    <InterpreterId>MSBuild|fusionate_3.9|$(MSBuildProjectFullPath)</InterpreterId>
     <SuppressPackageInstallationPrompt>True</SuppressPackageInstallationPrompt>
   </PropertyGroup>
   <PropertyGroup>
@@ -98,6 +98,15 @@
       <Id>fusionate</Id>
       <Version>3.8</Version>
       <Description>fusionate (Python 3.8 (64-bit))</Description>
+      <InterpreterPath>Scripts\python.exe</InterpreterPath>
+      <WindowsInterpreterPath>Scripts\pythonw.exe</WindowsInterpreterPath>
+      <PathEnvironmentVariable>PYTHONPATH</PathEnvironmentVariable>
+      <Architecture>X64</Architecture>
+    </Interpreter>
+    <Interpreter Include="fusionate_3.9\">
+      <Id>fusionate_3.9</Id>
+      <Version>3.9</Version>
+      <Description>fusionate_3.9 (Python 3.9 (64-bit))</Description>
       <InterpreterPath>Scripts\python.exe</InterpreterPath>
       <WindowsInterpreterPath>Scripts\pythonw.exe</WindowsInterpreterPath>
       <PathEnvironmentVariable>PYTHONPATH</PathEnvironmentVariable>

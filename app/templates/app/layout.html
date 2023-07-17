@@ -8,10 +8,10 @@
 
 
 
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 
     <!-- JS For Bootstrap CSS -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
@@ -22,6 +22,8 @@
     <script src="{% static 'app/scripts/modernizr-2.6.2.js' %}"></script>
     <script src="{% static 'app/scripts/vue.min.js' %}"></script>        
     <script src="{% static 'app/scripts/axios.min.js' %}"></script>     
+
+
 
 
  <link rel="script" type="text/javascript" href="{% static 'app/content/owl.carousel.min.css' %}" />
@@ -109,7 +111,7 @@
 </style>
 
 
-<body class="bg-dark text-white">
+<body class="bg-light text-black">
 
 
 
@@ -140,7 +142,7 @@
 
 
 {% if request.user.is_authenticated == True %}
-<aside class="sidebar bg-dark">
+<aside class="sidebar bg-light">
       <div class="toggle" >
         <a href="#" class="burger js-menu-toggle" data-toggle="collapse" data-target="#main-navbar">
               <span></span>
@@ -148,53 +150,99 @@
       </div>
             
     <div class="container">
-  <div class="card bg-secondary mt-4">
-  <div class="row no-gutters">
-    <div class="col-md-4 mt-4 mb-4">
-        <center>
-      <img src="https://cdn.pixabay.com/photo/2019/04/21/19/36/cat-4144810__340.jpg" class="rounded-circle" style="width: 75px; height: 75px;" alt="User Image">
-    </center>
-            </div>
-    <div class="col-md-8">
-      <div class="card-body">
-        <h5 class="card-title">Shadow</h5>
-        <p class="card-text">@shadowthecat</p>
+  <div class="card bg-light border-0">
+    <div class="row no-gutters">
+      <div class="col-md-4 mt-4 mb-4">
+        <img src="{% static 'assets/11.png' %}" class="img-fluid" alt="User Image">
+      </div>
+      <div class="col-md-8 mt-2">
+        <div class="card-body d-flex justify-content-end align-items-center">
+
+          <i class="fa-regular fa-bell m-2"></i>
+            <img src="{% static 'assets/5.png' %}" class="img-fluid" style="height:25px; width: 25px;"alt="User Image">
+        </div>
       </div>
     </div>
-  </div>
 
-  <div class="card-footer">
+  <div class="card-footer" hidden>
       <center>
-    <i class="bi bi-bell-fill"></i> Notifications</center>
+    <i class="bi bi-bell-fill"></i> Navigation</center>
   </div>
 </div>
-  <ul class="nav nav-pills mt-4">
+
+<ul class="nav mt-2">
+
+
   <li class="nav-item">
-    <a class="nav-link active bg-secondary text-white" href="#">Home</a>
+    <a class="nav-link text-dark" href="{% url 'home' %}">
+      <i class="fa-solid fa-house fa-bounce text-secondary"></i>
+      <span class="lead fs-6">Home</span>
+    </a>
+    <a class="nav-link text-dark" href="#">
+      <i class="fas fa-envelope text-secondary"></i>
+      <span class="lead fs-6">Messages</span>
+    </a>
+    <a class="nav-link text-dark" href="#">
+      <i class="fa-solid fa-calendar text-secondary"></i>
+      <span class="lead fs-6">Calendar</span>
+    </a>
+    <a class="nav-link text-dark" href="#">
+      <i class="fa-solid fa-magnifying-glass text-secondary"></i>
+      <span class="lead fs-6">Search Company Database</span>
+    </a>
+
+    <a class="nav-link text-dark mt-4" href="#">
+      <i class="fa-solid fa-hashtag text-secondary"></i>
+      <span class="lead fs-6">general</span>
+    </a>
+    <a class="nav-link text-dark" href="#">
+      <i class="fa-solid fa-hashtag text-secondary"></i>
+      <span class="lead fs-6">industry-news</span>
+    </a>
+    <a class="nav-link text-dark" href="#">
+      <i class="fa-solid fa-hashtag text-secondary"></i>
+      <span class="lead fs-6">chatroom</span>
+    </a>
+    <a class="nav-link text-dark" href="#">
+      <i class="fa-solid fa-hashtag text-secondary"></i>
+      <span class="lead fs-6">campaigns</span>
+    </a>
+    <a class="nav-link text-dark" href="#">
+      <i class="fa-solid fa-hashtag text-secondary"></i>
+      <span class="lead fs-6">social-media</span>
+    </a>
+    <a class="nav-link text-dark" href="#">
+      <i class="fa-solid fa-hashtag text-secondary"></i>
+      <span class="lead fs-6">analytics</span>
+    </a>
+    <a class="nav-link text-dark" href="#">
+      <i class="fa-solid fa-hashtag text-secondary"></i>
+      <span class="lead fs-6">branding</span>
+    </a>
+    <a class="nav-link text-dark" href="#">
+      <i class="fa-solid fa-hashtag text-secondary"></i>
+      <span class="lead fs-6">events</span>
+    </a>
+    <a class="nav-link text-dark" href="#">
+      <i class="fa-solid fa-plus text-secondary"></i>
+      <span class="lead fs-6">Add Controls</span>
+    </a>
   </li>
-  <li class="nav-item">
-    <a class="nav-link text-white" href="#">Apps</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link text-white" href="#">AI Tools</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link text-white" href="#">Agents</a>
-  </li>
+
+
+
 </ul>
-    </div>
+
+</div>
 
    
 </aside>
+
+
 {% endif %}
 
 
     <div class="container">
-        
-
-
-
-
 
         {% block content %}
 
