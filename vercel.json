@@ -1,0 +1,14 @@
+{
+  "builds": [
+    {
+      "src": "fusionate_ai_beta/wsgi.py",
+      "use": "@vercel/python"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "fusionate_ai_beta/wsgi.py"
+    }
+  ]
+}
